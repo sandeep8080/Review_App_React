@@ -7,38 +7,31 @@ const Reviews = () => {
   const length = reviews.length;
   const [current, setCurrent] = useState(0);
 
-  const handleLeftIcon = (index) => {
-    const moveLeft = index === 0 ? length - 1 : index - 1;
+  const { id, name, job, image, text } = reviews[current];
+
+  const handleLeftIcon = () => {
+    const moveLeft = current === 0 ? length - 1 : current - 1;
     setCurrent(moveLeft);
   };
 
-  const handleRightIcon = (index) => {
-    const moveRight = index === length - 1 ? 0 : index + 1;
+  const handleRightIcon = () => {
+    const moveRight = current === length - 1 ? 0 : current + 1;
     setCurrent(moveRight);
   };
   return (
-    <>
-      {reviews.map((item, index) => {
-        return (
-          <section
-            key={item.id}
-            className={current === index ? "active" : "inactive"}
-          >
-            <img src={item.image} className="img-conatiner" />
-            <h4>{item.name}</h4>
-            <h4>{item.job}</h4>
-            <p>{item.text}</p>
-            <footer>
-              <div>
-                <FaAngleLeft onClick={() => handleLeftIcon(index)} />
-                <FaAngleRight onClick={() => handleRightIcon(index)} />
-              </div>
-              <button>Surprise Me</button>
-            </footer>
-          </section>
-        );
-      })}
-    </>
+    <section key={id}>
+      <img src={image} className="img-conatiner" />
+      <h4>{name}</h4>
+      <h4>{job}</h4>
+      <p>{text}</p>
+      <footer>
+        <div>
+          <FaAngleLeft onClick={handleLeftIcon} />
+          <FaAngleRight onClick={handleRightIcon} />
+        </div>
+        <button>Surprise Me</button>
+      </footer>
+    </section>
   );
 };
 
